@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -11,21 +12,25 @@ import { QuestionService } from '../shared/question.service';
 })
 export class SearchQuestionsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  QuestionsList = new MatTableDataSource([]);
+  QuestionDataSource = new MatTableDataSource([]);
   displayedColumns: string[] = ['no', 'title', 'views', 'answers', 'action'];
-  constructor(private service: QuestionService, private router: Router) { }
+  questionFilterForm: FormGroup;
+  constructor(private service: QuestionService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.searchQuestions();
-    this.QuestionsList.paginator = this.paginator;
+    this.QuestionDataSource.paginator = this.paginator;
   }
-  searchQuestions(): void {
-    this.service.searchQuestions('desc', 'activity', 'angular').subscribe(data => {
-      this.QuestionsList.data = data.items;
-      this.QuestionsList.paginator = this.paginator;
+  searchQuestions(body): void {
+    this.service.searchQuestions(body).subscribe(data => {
+      this.QuestionDataSource.data = data.items;
+      this.QuestionDataSource.paginator = this.paginator;
     });
   }
   viewQuestion(questionId: string): void {
     this.router.navigate(['/', questionId]);
+  }
+  resetResult(): void {
+    this.QuestionDataSource.data = [];
+    this.QuestionDataSource.paginator = this.paginator;
   }
 }

@@ -1,0 +1,17 @@
+small {
+    color: grey;
+    font-size: small;
+}
+
+mat-card-content {
+    margin-left: 15px;
+}
+
+.breakword {
+    word-break: break-all;
+}
+
+.subtitle {
+    display: flex;
+    flex-flow: column;
+}

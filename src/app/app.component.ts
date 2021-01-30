@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { CommonService } from './shared/common.service';
 import { QuestionService } from './shared/question.service';
 
 @Component({
@@ -8,11 +10,14 @@ import { QuestionService } from './shared/question.service';
 })
 export class AppComponent implements OnInit{
   title = 'StackQuestions';
-  
+  showLoader = new BehaviorSubject(true);
   ngOnInit(): void {
-
+    this.service.showLoader.subscribe(data => {
+      setTimeout(() => {
+        this.showLoader.next(data);
+      }, 100);
+    });
   }
-  constructor(private service: QuestionService) {
-    
+  constructor(private service: CommonService) {
   }
 }

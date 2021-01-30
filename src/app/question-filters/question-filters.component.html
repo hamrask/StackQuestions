@@ -1,0 +1,114 @@
+<form [formGroup]="questionFilterForm">
+    <div class="row">
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="order" placeholder="Order questions by">
+                    <mat-option value="asc">Ascending</mat-option>
+                    <mat-option value="desc">Descending</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="sort" placeholder="Sort questions by">
+                    <mat-option value="activity">Activity</mat-option>
+                    <mat-option value="votes">Votes</mat-option>
+                    <mat-option value="creation">Creation</mat-option>
+                    <mat-option value="relevance">Relevance</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="q" placeholder="Query">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="accepted" placeholder="Accepted Question?">
+                    <mat-option value="True">True</mat-option>
+                    <mat-option value="False">False</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input type="number" matInput formControlName="answers" placeholder="Number of answers">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="body" placeholder="Question body">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="closed" placeholder="is Question is closed?">
+                    <mat-option value="True">True</mat-option>
+                    <mat-option value="False">False</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="migrated" placeholder="is Question is migrated?">
+                    <mat-option value="True">True</mat-option>
+                    <mat-option value="False">False</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="notice" placeholder="questions with post notices">
+                    <mat-option value="True">True</mat-option>
+                    <mat-option value="False">False</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="nottagged" placeholder="not tagged">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="tagged" placeholder="tagged">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="title" placeholder="title">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="user" placeholder="user">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input matInput formControlName="url" placeholder="url">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <input type="number" matInput formControlName="views" placeholder="views">
+            </mat-form-field>
+        </div>
+        <div class="col-md-2">
+            <mat-form-field>
+                <mat-select formControlName="wiki" placeholder="Show only wiki questions">
+                    <mat-option value="True">True</mat-option>
+                    <mat-option value="False">False</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <button mat-raised-button color="primary" (click)="submitFilters()">Search</button>
+            <button class="mr5" type="reset" mat-stroked-button color="warn" (click)="resetResults()">Reset</button>
+        </div>
+    </div>
+</form>

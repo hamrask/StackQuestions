@@ -1,33 +1,39 @@
-<mat-form-field>
-    <label>Question</label>
-    <textarea matInput></textarea>
-</mat-form-field>
-<table mat-table [dataSource]="QuestionsList" class="mat-elevation-z8">
-    <ng-container matColumnDef="no">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element; index as i"> {{i+1}} </td>
-    </ng-container>
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
-        <td mat-cell *matCellDef="let element">
-            <div [innerHTML]="element.title"></div>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="views">
-        <th mat-header-cell *matHeaderCellDef> Views </th>
-        <td mat-cell *matCellDef="let element"> {{element.view_count}} </td>
-    </ng-container>
-    <ng-container matColumnDef="answers">
-        <th mat-header-cell *matHeaderCellDef> Answers </th>
-        <td mat-cell *matCellDef="let element"> {{element.answer_count}} </td>
-    </ng-container>
-    <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element">
-            <mat-icon class="icon" (click)="viewQuestion(element.question_id)">remove_red_eye</mat-icon>
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSize]="10" #paginator></mat-paginator>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h3>Question Search</h3>
+    </mat-toolbar-row>
+</mat-toolbar>
+<app-question-filters (filterSubmit)="searchQuestions($event)" (reset)="resetResult()"></app-question-filters>
+<div class="row">
+    <div class="col-md-12">
+        <table mat-table [dataSource]="QuestionDataSource" *ngIf="QuestionDataSource.data.length > 0">
+            <ng-container matColumnDef="no">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element; index as i"> {{i+1}} </td>
+            </ng-container>
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Title </th>
+                <td mat-cell *matCellDef="let element">
+                    <div [innerHTML]="element.title"></div>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="views">
+                <th mat-header-cell *matHeaderCellDef> Views </th>
+                <td mat-cell *matCellDef="let element"> {{element.view_count}} </td>
+            </ng-container>
+            <ng-container matColumnDef="answers">
+                <th mat-header-cell *matHeaderCellDef> Answers </th>
+                <td mat-cell *matCellDef="let element"> {{element.answer_count}} </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon class="icon" (click)="viewQuestion(element.question_id)">remove_red_eye</mat-icon>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator *ngIf="QuestionDataSource.data.length > 0" [pageSize]="10" #paginator></mat-paginator>
+    </div>
+</div>

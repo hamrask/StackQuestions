@@ -20,7 +20,9 @@ questionDetails: any;
     const questionId = this.route.snapshot.params.id;
     if (questionId) {
       this.service.getQuestionByQuestionId(questionId).subscribe(data => {
-        this.questionDetails = data;
+        if (data.items && data.items.length > 0) {
+          this.questionDetails = data.items[0];
+        }
       });
     }
   }

@@ -1,1 +1,52 @@
-<div>{{questionDetails | json}}</div>
+<mat-toolbar>
+    <mat-toolbar-row>
+        <h3>Question ID : {{questionDetails?.question_id}}</h3>
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title [innerHtml]="questionDetails?.title"></mat-card-title>
+        <mat-card-subtitle class="subtitle">
+            <p>by
+                <a [href]="questionDetails?.owner?.link" [innerHTML]="questionDetails?.owner?.display_name"></a>
+            </p>
+            <p>{{ questionDetails?.creation_date * 1000 | date: "dd/MM/yyyy hh:mm:ss a" }}
+            </p>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+            <mat-chip-list>
+                <mat-chip *ngFor="let item of questionDetails?.tags">{{ item }}
+                </mat-chip>
+            </mat-chip-list>
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            <mat-icon>link</mat-icon>
+            <a class="breakword" [href]="questionDetails?.link">{{ questionDetails?.link }}</a>
+        </p>
+        <span *ngIf="questionDetails?.is_answered; else close">
+      <mat-icon>done</mat-icon>Answered,{{
+        questionDetails?.answer_count
+      }}
+      answers found
+    </span>
+
+        <ng-template #close>
+            <span>
+        <mat-icon>close</mat-icon>
+        Not answered till now
+      </span>
+        </ng-template>
+        <p>
+            <mat-icon>remove_red_eye</mat-icon>{{ questionDetails?.view_count }} views
+        </p>
+        <p>
+            <mat-icon>score</mat-icon>{{ questionDetails?.score }}</p>
+        <p>
+            <mat-icon>book</mat-icon>{{ questionDetails?.content_license }}</p>
+        <p>
+            Last activity : {{ questionDetails?.last_activity_date * 1000 | date: "dd/MM/yyyy hh:mm:ss a" }}
+        </p>
+    </mat-card-content>
+</mat-card>
