@@ -10,7 +10,7 @@ import { QuestionService } from './shared/question.service';
 })
 export class AppComponent implements OnInit{
   title = 'StackQuestions';
-  showLoader = new BehaviorSubject(true);
+  showLoader = new BehaviorSubject(false);
   ngOnInit(): void {
     this.service.showLoader.subscribe(data => {
       setTimeout(() => {
